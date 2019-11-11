@@ -68,9 +68,13 @@ contract SimpleBank {
     /// @return The users enrolled status
     // OK Emit the appropriate event
     function enroll() public returns (bool){
-        enrolled[msg.sender] = true;
-        emit LogEnrolled(msg.sender);
-        return enrolled[msg.sender];
+        if (enrolled[msg.sender] = true){
+            return true;
+        } else {
+            enrolled[msg.sender] = true;
+            emit LogEnrolled(msg.sender);
+            return enrolled[msg.sender];
+        }
     }
 
     /// @notice Deposit ether into bank/smart contract
@@ -98,7 +102,7 @@ contract SimpleBank {
            Subtract the amount from the sender's balance, and try to send that amount of ether
            to the user attempting to withdraw. 
            return the user's balance.*/
-            require(withdrawAmount <= balances[msg.sender]);
+            require(balances[msg.sender] >= withdrawAmount);
             balances[msg.sender] -= withdrawAmount;
             msg.sender.transfer(withdrawAmount);
             emit LogWithdrawal(msg.sender, withdrawAmount, balances[msg.sender]);
