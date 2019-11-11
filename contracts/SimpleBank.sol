@@ -33,7 +33,7 @@ contract SimpleBank {
 
     /* OK Create an event called LogWithdrawal */
     /* OK Add 3 arguments for this event, an accountAddress, withdrawAmount and a newBalance */
-    event LogWitdrawal(address accountAddress, uint withdrwAmount, uint newBalance);
+    event LogWithdrawal(address accountAddress, uint withdrwAmount, uint newBalance);
 
 
     //
@@ -102,7 +102,7 @@ contract SimpleBank {
                balances[msg.sender] -= withdrawAmount;
                msg.sender.transfer(withdrawAmount);
                uint newBalance = balances[msg.sender];
-               emit LogWitdrawal(msg.sender, withdrawAmount, newBalance);
+               emit LogWithdrawal(msg.sender, withdrawAmount, newBalance);
            }
            return balances[msg.sender];
 
